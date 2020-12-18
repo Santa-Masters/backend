@@ -1,0 +1,33 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Actualmente existen múltiples ofertas laborales por parte de platzi master, estas se encuentran publicadas dentro de la plataforma de platzi a manera de posts; sin embargo, cada vez  aumentan las vacantes y con esto, aumenta la complejidad a la hora de encontrar la oferta ideal.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js",
+    "start": "NODE_ENV=production  node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Santa-Masters/backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Santa-Masters/backend/issues"
+  },
+  "homepage": "https://github.com/Santa-Masters/backend#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "cors": "^2.8.5",
+    "debug": "^4.3.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.8"
+  }
+}
