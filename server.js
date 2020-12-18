@@ -8,7 +8,7 @@ const app = express();
 
 //configuration
 if (config.dev === 'production') {
-  const corsOptions = { origin: config.frontend };
+  const corsOptions = { origin: config.frontend.frontendUrl };
   app.use(cors(corsOptions));
 } else {
   app.use(cors());
