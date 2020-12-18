@@ -1,61 +1,40 @@
-const mongoose = require('mongoose');
-const config = require('../config');
-
-const USER = config.database.dbUser;
-const PASSWORD = config.database.dbPassword;
-const DB_HOST = config.database.dbHost;
-const DB_PORT = config.database.dbPort;
-const DB_NAME = config.database.dbName;
-
-// const MONGO_URI = `mongodb+srv://${USER}:${PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?retryWrites=true&w=majority`;
-const MONGO_URI = `mongodb+srv://${USER}:${PASSWORD}@${DB_HOST}/${DB_NAME}?retryWrites=true&w=majority`
-console.log(MONGO_URI)
-class Store  {
+class MysqlLib {
   constructor(model) {
     this.model = model;
-    this.handleCon();
-  }
-
-  // Singleton implementation to connect database
-  handleCon() {
-    if (!Store.connection) {
-      Store.connection = mongoose
-        .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-        .then(() => {
-          console.log('[DB] Success contected');
-        })
-        .catch((reject) => {
-          console.log(`[DB] fail contected ${reject}`);
-        });
-      mongoose.set('useFindAndModify', false);
-    }
-    return Store.connection;
   }
 
   async get(query) {
-    const listData = await this.model.findById(query);
-    return listData;
+    const item = await this.model.findOne({
+      where: query,
+    });
+    return item;
   }
 
-  async getAll(data,sort) {
-    const listData = await this.model.find(data).sort(sort).exec();
+  async getAll(query) {
+    const listData = await this.model.findAll({
+      where: query,
+    });
     return listData;
   }
 
   async create(data) {
-    const created = await this.model(data).save()
+    const created = await this.model.create(data);
     return created;
   }
 
   async update(data, query) {
-    const updated = await this.model.findByIdAndUpdate(query, data);
+    const updated = await this.model.update(data, {
+      where: query
+    });
     return updated;
   }
 
   async delete(query) {
-    const deleted = await this.model.findByIdAndDelete(query);
+    const deleted = await this.model.destroy({
+      where: query
+    });
     return deleted;
   }
 }
 
-module.exports = Store;
+module.exports = MysqlLib;
