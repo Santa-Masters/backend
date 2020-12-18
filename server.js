@@ -3,7 +3,7 @@ const cors = require('cors');
 const chalk = require('chalk');
 const config = require('./config');
 const routes = require('./network/routes');
-
+const {errorHandler} = require('./utils/midleware/errorHandler')
 const app = express();
 
 //configuration
@@ -20,7 +20,7 @@ routes(app);
 
 
 //midlewares
-
+app.use(errorHandler)
 
 //server up
 app.listen(config.api.port, () => {

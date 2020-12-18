@@ -7,8 +7,9 @@ const DB_HOST = config.database.dbHost;
 const DB_PORT = config.database.dbPort;
 const DB_NAME = config.database.dbName;
 
-const MONGO_URI = `mongodb://${USER}:${PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?authSource=admin`;
-
+// const MONGO_URI = `mongodb+srv://${USER}:${PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?retryWrites=true&w=majority`;
+const MONGO_URI = `mongodb+srv://${USER}:${PASSWORD}@${DB_HOST}/${DB_NAME}?retryWrites=true&w=majority`
+console.log(MONGO_URI)
 class Store  {
   constructor(model) {
     this.model = model;
